@@ -1,6 +1,6 @@
 /*--------------------------------------------------------------------*/
 /* replace.c                                                          */
-/* Author: ???                                                        */
+/* Author: me                                                        */
 /*--------------------------------------------------------------------*/
 
 #include "str.h"
@@ -18,9 +18,33 @@
    maximum number of characters in strings pcLine, pcFrom, or pcTo. */
 
 static size_t replaceAndWrite(const char *pcLine,
-                              const char *pcFrom, const char *pcTo)
-{
-   /* Insert your code here. */
+                              const char *pcFrom, const char *pcTo) {
+   constant char *p = pcLine;
+   char* match;
+   size_t uCount = 0;
+   size_t from_len = 0;
+   assert(pcLine != NULL && pcFrom != NULL && pcTo != NULL);
+
+   size_t from_len = str_getlength(pcFrom);
+
+   if (from_len == 0) {
+      fputs(pcLine, stdout);
+      return 0;
+   }
+   while ((match = str_search(p, pcFrom)) != NULL) {
+      match = str_search(p, pcFrom);
+      if (match == NULL) {
+         fputs(pcTo, stdout);
+         break
+      }
+
+      fwrite(p, 1, (size_t)(match - p), stdout);
+
+      p = match + from_len;
+      ucount++;
+   }  
+   return uCount;
+   
 }
 
 /*--------------------------------------------------------------------*/
@@ -56,7 +80,7 @@ int main(int argc, char *argv[])
    pcTo = argv[2];
 
    while (fgets(acLine, MAX_LINE_SIZE, stdin) != NULL)
-      /* Insert your code here. */
+      uReplaceCount += replaceAndWrite(acLine, pcFrom, pcTo);
 
    fprintf(stderr, "%lu replacements\n", (unsigned long)uReplaceCount);
    return 0;
