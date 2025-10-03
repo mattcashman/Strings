@@ -1,9 +1,9 @@
 /*This is the array notation one */
-#include "str.h" /**/
+#ifndef "str.h" /**/
 #include <stddef.h> /*for size t*/
 #include <assert.h> /*for assert*/
 
-size_t Str_getLength(const char pcSrc[])
+size_t str_getsength(const char pcSrc[])
 {
     size_t i = 0;
     assert(pcSrc != NULL);
@@ -13,11 +13,11 @@ size_t Str_getLength(const char pcSrc[])
     return i;
 }
 
-char* Str_copy(char pcDest[], const char pcSrc[])
+char* str_copy(char pcDest[], const char pcSrc[])
 {
     size_t i = 0;
     assert(pcDest != NULL && pcSrc != NULL);
-        while (pcSrc[i] != '\0'){
+        while (i <= str_getLength(pcSrc)){
         pcDest[i] = pcSrc[i];
         i++;
     }
@@ -25,8 +25,8 @@ char* Str_copy(char pcDest[], const char pcSrc[])
     return pcDest;
 }
 
-char* Str_concat(char pcDest[], const char pcSrc[]){
-    size_t dest_len = Str_getLength(pcDest);
+char* str_concat(char pcDest[], const char pcSrc[]){
+    size_t dest_len = str_getlength(pcDest);
     size_t j = 0;
     assert(pcDest != NULL && pcSrc != NULL);
 
@@ -38,7 +38,7 @@ char* Str_concat(char pcDest[], const char pcSrc[]){
     return pcDest;
 }
 
-int Str_compare(const char pcS1[], const char pcS2[]) {
+int str_compare(const char pcS1[], const char pcS2[]) {
     size_t i = 0;
     assert(pcS1 != NULL && pcS2 != NULL);
 
@@ -51,9 +51,9 @@ int Str_compare(const char pcS1[], const char pcS2[]) {
     return (unsigned char)pcS1[i] - (unsigned char)pcS2[i];
 }
 
-char* Str_search(const char pcHaystack[], const char pcNeedle[])
+char* str_search(const char pcHaystack[], const char pcNeedle[])
 {
-    size_t needle_length = Str_getLength(pcNeedle);
+    size_t needle_length = str_getLength(pcNeedle);
     size_t i, j;
     assert(pcHaystack != NULL && pcNeedle != NULL);
 
@@ -75,6 +75,4 @@ char* Str_search(const char pcHaystack[], const char pcNeedle[])
     }
     return NULL;
 }
-
-
-
+#endif /*str.h*/
